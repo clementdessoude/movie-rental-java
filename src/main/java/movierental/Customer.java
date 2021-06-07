@@ -14,22 +14,30 @@ public class Customer {
 
     public String statement() {
         double totalAmount = 0;
-        String result = "Rental Record for " + getName() + "\n";
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("Rental Record for ").append(getName()).append("\n");
 
         for (Rental each : rentals) {
             double thisAmount = getRentalAmount(each);
 
-            result += getRentalFiguresStatement(each, thisAmount);
+            builder.append(getRentalFiguresStatement(each, thisAmount));
             totalAmount += thisAmount;
         }
 
         int frequentRenterPoints = rentals.stream().mapToInt(this::getFrequentRenterPoints).sum();
 
         // add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        builder
+            .append("Amount owed is ")
+            .append(totalAmount)
+            .append("\n");
+        builder
+            .append("You earned ")
+            .append(frequentRenterPoints)
+            .append(" frequent renter points");
 
-        return result;
+        return builder.toString();
     }
 
     private String getRentalFiguresStatement(Rental each, double thisAmount) {
