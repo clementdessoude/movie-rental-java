@@ -20,11 +20,13 @@ public class Customer {
         for (Rental each : rentals) {
             double thisAmount = getRentalAmount(each);
 
-            frequentRenterPoints += getFrequentRenterPoints(each);
-
             // show figures for this rental
             result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
             totalAmount += thisAmount;
+        }
+
+        for (Rental each : rentals) {
+            frequentRenterPoints += getFrequentRenterPoints(each);
         }
 
         // add footer lines
