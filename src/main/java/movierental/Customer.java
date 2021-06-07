@@ -20,9 +20,11 @@ public class Customer {
 
         for (Rental each : rentals) {
             double thisAmount = getRentalAmount(each);
-
-            builder.append(getRentalFiguresStatement(each, thisAmount));
             totalAmount += thisAmount;
+        }
+
+        for (Rental each : rentals) {
+            builder.append(getRentalFiguresStatement(each, getRentalAmount(each)));
         }
 
         int frequentRenterPoints = rentals.stream().mapToInt(this::getFrequentRenterPoints).sum();
