@@ -26,11 +26,6 @@ public class Rental {
     }
 
     public int getFrequentRenterPoints() {
-        int frequentRenterPoints = 1;
-        // add bonus for a two day new release rental
-        if ((getMovie().getType() == MovieType.NEW_RELEASE) && getDaysRented() > 1)
-            frequentRenterPoints++;
-
-        return frequentRenterPoints;
+        return movie.getFrequentRenterPoints(getDaysRented());
     }
 }
