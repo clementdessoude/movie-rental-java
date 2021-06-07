@@ -13,20 +13,15 @@ public class Customer {
     }
 
     public String statement() {
-        double totalAmount = 0;
 
         StringBuilder builder = new StringBuilder();
         builder.append("Rental Record for ").append(getName()).append("\n");
 
         for (Rental each : rentals) {
-            double thisAmount = getRentalAmount(each);
-            totalAmount += thisAmount;
-        }
-
-        for (Rental each : rentals) {
             builder.append(getRentalFiguresStatement(each, getRentalAmount(each)));
         }
 
+        double totalAmount = rentals.stream().mapToDouble(this::getRentalAmount).sum();
         int frequentRenterPoints = rentals.stream().mapToInt(this::getFrequentRenterPoints).sum();
 
         builder.append(getStatementFooter(totalAmount, frequentRenterPoints));
