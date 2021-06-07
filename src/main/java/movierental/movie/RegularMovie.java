@@ -9,5 +9,11 @@ public class RegularMovie extends Movie {
         super(title, MovieType.REGULAR);
     }
 
-
+    @Override
+    public double getPrice(int daysRented) {
+        double basePrice = 2;
+        if (daysRented > 2)
+            return basePrice + (daysRented - 2) * 1.5;
+        return basePrice;
+    }
 }
