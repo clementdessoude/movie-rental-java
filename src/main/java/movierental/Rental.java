@@ -1,5 +1,7 @@
 package movierental;
 
+import movierental.movie.Movie;
+
 /**
  * The rental class represents a customer renting a movie.
  */
