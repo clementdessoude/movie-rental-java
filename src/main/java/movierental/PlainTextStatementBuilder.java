@@ -2,18 +2,12 @@ package movierental;
 
 public class PlainTextStatementBuilder extends StatementBuilder {
     @Override
-    public String getStatement(Customer customer) {
-        double totalAmount = customer.getRentals().stream().mapToDouble(Rental::getRentalAmount).sum();
-        int frequentRenterPoints = customer.getRentals().stream().mapToInt(Rental::getFrequentRenterPoints).sum();
-
-        String header = "Rental Record for " + customer.getName() + "\n";
-        String rentalsStatements = getRentalsStatements(customer);
-        String footer = getStatementFooter(totalAmount, frequentRenterPoints);
-
-        return header + rentalsStatements + footer;
+    protected String getHeader(Customer customer) {
+        return "Rental Record for " + customer.getName() + "\n";
     }
 
-    private String getRentalsStatements(Customer customer) {
+    @Override
+    protected String getRentalsStatements(Customer customer) {
         StringBuilder builder = new StringBuilder();
         for (Rental each : customer.getRentals()) {
             builder.append(getRentalFiguresStatement(each, each.getRentalAmount()));
@@ -21,7 +15,8 @@ public class PlainTextStatementBuilder extends StatementBuilder {
         return builder.toString();
     }
 
-    private String getStatementFooter(
+    @Override
+    protected String getFooter(
         double totalAmount,
         int frequentRenterPoints
     ) {
