@@ -12,10 +12,6 @@ public abstract class Movie {
         this.type = type;
     }
 
-    public MovieType getType() {
-        return type;
-    }
-
     public String getTitle() {
         return title;
     }
