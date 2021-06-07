@@ -13,8 +13,8 @@ public class Customer {
     }
 
     public String statement() {
-        double totalAmount = rentals.stream().mapToDouble(this::getRentalAmount).sum();
-        int frequentRenterPoints = rentals.stream().mapToInt(this::getFrequentRenterPoints).sum();
+        double totalAmount = rentals.stream().mapToDouble(Rental::getRentalAmount).sum();
+        int frequentRenterPoints = rentals.stream().mapToInt(Rental::getFrequentRenterPoints).sum();
 
         String header = "Rental Record for " + getName() + "\n";
         String rentalsStatements = getRentalsStatements();
@@ -26,7 +26,7 @@ public class Customer {
     private String getRentalsStatements() {
         StringBuilder builder = new StringBuilder();
         for (Rental each : rentals) {
-            builder.append(getRentalFiguresStatement(each, getRentalAmount(each)));
+            builder.append(getRentalFiguresStatement(each, each.getRentalAmount()));
         }
         return builder.toString();
     }
@@ -43,35 +43,6 @@ public class Customer {
 
     private String getRentalFiguresStatement(Rental each, double thisAmount) {
         return "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
-    }
-
-    private int getFrequentRenterPoints(Rental each) {
-        int frequentRenterPoints = 1;
-        // add bonus for a two day new release rental
-        if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1)
-            frequentRenterPoints++;
-
-        return frequentRenterPoints;
-    }
-
-    private double getRentalAmount(Rental each) {
-        double thisAmount = 0;
-        switch (each.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (each.getDaysRented() > 2)
-                    thisAmount += (each.getDaysRented() - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += each.getDaysRented() * 3;
-                break;
-            case Movie.CHILDREN:
-                thisAmount += 1.5;
-                if (each.getDaysRented() > 3)
-                    thisAmount += (each.getDaysRented() - 3) * 1.5;
-                break;
-        }
-        return thisAmount;
     }
 
     public void addRental(Rental rental) {
