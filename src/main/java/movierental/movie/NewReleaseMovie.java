@@ -9,5 +9,8 @@ public class NewReleaseMovie extends Movie {
         super(title, MovieType.NEW_RELEASE);
     }
 
-
+    @Override
+    public double getPrice(int daysRented) {
+        return daysRented * 3;
+    }
 }

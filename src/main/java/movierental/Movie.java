@@ -5,7 +5,6 @@ public abstract class Movie {
     private final String title;
     private final MovieType type;
 
-
     public Movie(String title, MovieType type) {
         this.title = title;
         this.type = type;
@@ -19,5 +18,5 @@ public abstract class Movie {
         return title;
     }
 
-
+    public abstract double getPrice(int daysRented);
 }
