@@ -1,4 +1,6 @@
-package movierental;
+package movierental.movie;
+
+import movierental.MovieType;
 
 public abstract class Movie {
 
