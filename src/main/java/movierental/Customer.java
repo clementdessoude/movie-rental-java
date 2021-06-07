@@ -27,17 +27,19 @@ public class Customer {
 
         int frequentRenterPoints = rentals.stream().mapToInt(this::getFrequentRenterPoints).sum();
 
-        // add footer lines
-        builder
-            .append("Amount owed is ")
-            .append(totalAmount)
-            .append("\n");
-        builder
-            .append("You earned ")
-            .append(frequentRenterPoints)
-            .append(" frequent renter points");
+        builder.append(getStatementFooter(totalAmount, frequentRenterPoints));
 
         return builder.toString();
+    }
+
+    private String getStatementFooter(
+        double totalAmount,
+        int frequentRenterPoints
+    ) {
+        String amountOwnedSummary =  "Amount owed is " + totalAmount;
+        String frequentRenterPointSummary = "You earned " + frequentRenterPoints + " frequent renter points";
+
+        return amountOwnedSummary + "\n" + frequentRenterPointSummary;
     }
 
     private String getRentalFiguresStatement(Rental each, double thisAmount) {
