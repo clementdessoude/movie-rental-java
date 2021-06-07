@@ -19,8 +19,7 @@ public class Customer {
         for (Rental each : rentals) {
             double thisAmount = getRentalAmount(each);
 
-            // show figures for this rental
-            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
+            result += getRentalFiguresStatement(each, thisAmount);
             totalAmount += thisAmount;
         }
 
@@ -31,6 +30,10 @@ public class Customer {
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
 
         return result;
+    }
+
+    private String getRentalFiguresStatement(Rental each, double thisAmount) {
+        return "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
     }
 
     private int getFrequentRenterPoints(Rental each) {
