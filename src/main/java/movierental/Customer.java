@@ -13,19 +13,21 @@ public class Customer {
     }
 
     public String statement() {
-
-        StringBuilder builder = new StringBuilder();
-        builder.append("Rental Record for ").append(getName()).append("\n");
-
-        for (Rental each : rentals) {
-            builder.append(getRentalFiguresStatement(each, getRentalAmount(each)));
-        }
-
         double totalAmount = rentals.stream().mapToDouble(this::getRentalAmount).sum();
         int frequentRenterPoints = rentals.stream().mapToInt(this::getFrequentRenterPoints).sum();
 
-        builder.append(getStatementFooter(totalAmount, frequentRenterPoints));
+        String header = "Rental Record for " + getName() + "\n";
+        String rentalsStatements = getRentalsStatements();
+        String footer = getStatementFooter(totalAmount, frequentRenterPoints);
 
+        return header + rentalsStatements + footer;
+    }
+
+    private String getRentalsStatements() {
+        StringBuilder builder = new StringBuilder();
+        for (Rental each : rentals) {
+            builder.append(getRentalFiguresStatement(each, getRentalAmount(each)));
+        }
         return builder.toString();
     }
 
