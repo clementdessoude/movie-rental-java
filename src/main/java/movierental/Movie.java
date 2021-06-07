@@ -2,19 +2,15 @@ package movierental;
 
 public class Movie {
 
-    public static final int CHILDREN = 2;
-    public static final int NEW_RELEASE = 1;
-    public static final int REGULAR = 0;
-
     private final String title;
-    private final int priceCode;
+    private final MovieType priceCode;
 
-    public Movie(String title, int priceCode) {
+    public Movie(String title, MovieType priceCode) {
         this.title = title;
         this.priceCode = priceCode;
     }
 
-    public int getPriceCode() {
+    public MovieType getPriceCode() {
         return priceCode;
     }
 

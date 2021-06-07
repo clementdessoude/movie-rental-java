@@ -22,7 +22,7 @@ public class CustomerTest {
     public void should_handle_regular_movies() {
         Customer customer = new Customer("Bob");
 
-        customer.addRental(new Rental(new Movie("Jaws", Movie.REGULAR), 2));
+        customer.addRental(new Rental(new Movie("Jaws", MovieType.REGULAR), 2));
 
         String expected = "" +
             "Rental Record for Bob\n" +
@@ -37,7 +37,7 @@ public class CustomerTest {
     public void should_handle_regular_movies_with_more_than_two_days() {
         Customer customer = new Customer("Bob");
 
-        customer.addRental(new Rental(new Movie("Jaws", Movie.REGULAR), 3));
+        customer.addRental(new Rental(new Movie("Jaws", MovieType.REGULAR), 3));
 
         String expected = "" +
             "Rental Record for Bob\n" +
@@ -51,12 +51,12 @@ public class CustomerTest {
     @Test
     public void test() {
         Customer customer = new Customer("Bob");
-        customer.addRental(new Rental(new Movie("Jaws", Movie.REGULAR), 2));
-        customer.addRental(new Rental(new Movie("Golden Eye", Movie.REGULAR), 3));
-        customer.addRental(new Rental(new Movie("Short New", Movie.NEW_RELEASE), 1));
-        customer.addRental(new Rental(new Movie("Long New", Movie.NEW_RELEASE), 2));
-        customer.addRental(new Rental(new Movie("Bambi", Movie.CHILDREN), 3));
-        customer.addRental(new Rental(new Movie("Toy Story", Movie.CHILDREN), 4));
+        customer.addRental(new Rental(new Movie("Jaws", MovieType.REGULAR), 2));
+        customer.addRental(new Rental(new Movie("Golden Eye", MovieType.REGULAR), 3));
+        customer.addRental(new Rental(new Movie("Short New", MovieType.NEW_RELEASE), 1));
+        customer.addRental(new Rental(new Movie("Long New", MovieType.NEW_RELEASE), 2));
+        customer.addRental(new Rental(new Movie("Bambi", MovieType.CHILDREN), 3));
+        customer.addRental(new Rental(new Movie("Toy Story", MovieType.CHILDREN), 4));
 
         String expected = "" +
                 "Rental Record for Bob\n" +
