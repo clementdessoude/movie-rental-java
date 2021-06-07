@@ -14,7 +14,6 @@ public class Customer {
 
     public String statement() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
         for (Rental each : rentals) {
@@ -25,9 +24,7 @@ public class Customer {
             totalAmount += thisAmount;
         }
 
-        for (Rental each : rentals) {
-            frequentRenterPoints += getFrequentRenterPoints(each);
-        }
+        int frequentRenterPoints = rentals.stream().mapToInt(this::getFrequentRenterPoints).sum();
 
         // add footer lines
         result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
