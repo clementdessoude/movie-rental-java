@@ -2,6 +2,9 @@ package movierental;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
+import movierental.movie.ChildrenMovie;
+import movierental.movie.NewReleaseMovie;
+import movierental.movie.RegularMovie;
 import org.junit.Test;
 
 public class CustomerTest {
@@ -22,7 +25,7 @@ public class CustomerTest {
     public void should_handle_regular_movies() {
         Customer customer = new Customer("Bob");
 
-        customer.addRental(new Rental(new Movie("Jaws", MovieType.REGULAR), 2));
+        customer.addRental(new Rental(new RegularMovie("Jaws"), 2));
 
         String expected = "" +
             "Rental Record for Bob\n" +
@@ -37,7 +40,7 @@ public class CustomerTest {
     public void should_handle_regular_movies_with_more_than_two_days() {
         Customer customer = new Customer("Bob");
 
-        customer.addRental(new Rental(new Movie("Jaws", MovieType.REGULAR), 3));
+        customer.addRental(new Rental(new RegularMovie("Jaws"), 3));
 
         String expected = "" +
             "Rental Record for Bob\n" +
@@ -51,12 +54,12 @@ public class CustomerTest {
     @Test
     public void test() {
         Customer customer = new Customer("Bob");
-        customer.addRental(new Rental(new Movie("Jaws", MovieType.REGULAR), 2));
-        customer.addRental(new Rental(new Movie("Golden Eye", MovieType.REGULAR), 3));
-        customer.addRental(new Rental(new Movie("Short New", MovieType.NEW_RELEASE), 1));
-        customer.addRental(new Rental(new Movie("Long New", MovieType.NEW_RELEASE), 2));
-        customer.addRental(new Rental(new Movie("Bambi", MovieType.CHILDREN), 3));
-        customer.addRental(new Rental(new Movie("Toy Story", MovieType.CHILDREN), 4));
+        customer.addRental(new Rental(new RegularMovie("Jaws"), 2));
+        customer.addRental(new Rental(new RegularMovie("Golden Eye"), 3));
+        customer.addRental(new Rental(new NewReleaseMovie("Short New"), 1));
+        customer.addRental(new Rental(new NewReleaseMovie("Long New"), 2));
+        customer.addRental(new Rental(new ChildrenMovie("Bambi"), 3));
+        customer.addRental(new Rental(new ChildrenMovie("Toy Story"), 4));
 
         String expected = "" +
                 "Rental Record for Bob\n" +

@@ -1,9 +1,10 @@
 package movierental;
 
-public class Movie {
+public abstract class Movie {
 
     private final String title;
     private final MovieType type;
+
 
     public Movie(String title, MovieType type) {
         this.title = title;
