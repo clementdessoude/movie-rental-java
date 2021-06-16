@@ -1,23 +1,33 @@
 package movierental;
 
+import movierental.movie.Movie;
+
 /**
  * The rental class represents a customer renting a movie.
  */
 public class Rental {
 
-    private Movie _movie;
-    private int _daysRented;
+    private final Movie movie;
+    private final int daysRented;
 
     public Rental(Movie movie, int daysRented) {
-        _movie = movie;
-        _daysRented = daysRented;
+        this.movie = movie;
+        this.daysRented = daysRented;
     }
 
     public int getDaysRented() {
-        return _daysRented;
+        return daysRented;
     }
 
     public Movie getMovie() {
-        return _movie;
+        return movie;
+    }
+
+    public double getRentalAmount() {
+        return movie.getPrice(getDaysRented());
+    }
+
+    public int getFrequentRenterPoints() {
+        return movie.getFrequentRenterPoints(getDaysRented());
     }
 }
